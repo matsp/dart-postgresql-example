@@ -1,2 +1,1 @@
-# dart-postgresql-example
-Example dart application that persists data in postgresql
+# Example PostgreSQL application with CRUD operations
