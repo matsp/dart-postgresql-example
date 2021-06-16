@@ -10,7 +10,7 @@ class UserRepository implements Repository<UserDto> {
   UserRepository(this.db);
 
   @override
-  Future<UserDto?> get(String id) async {
+  Future<UserDto?> getById(String id) async {
     UserDto? user;
 
     try {
@@ -33,14 +33,14 @@ class UserRepository implements Repository<UserDto> {
   }
 
   @override
-  Future<void> delete(String id) async {
+  Future<void> delete(UserDto user) async {
     try {
       await db.query(
         'DELETE FROM auth.users WHERE id=@id',
-        substitutionValues: {'id': id},
+        substitutionValues: {'id': user.id},
       );
     } catch (e) {
-      throw UserNotFoundException('id: $id');
+      throw UserNotFoundException('id: ${user.id}');
     }
   }
 

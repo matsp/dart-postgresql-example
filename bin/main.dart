@@ -10,7 +10,7 @@ Future<void> main(List<String> arguments) async {
   final userRepo = UserRepository(db.connection);
 
   try {
-    final user = await userRepo.get('be06b5af-152f-4abb-a010-cdfee2eae9c0');
+    final user = await userRepo.getById('be06b5af-152f-4abb-a010-cdfee2eae9c0');
     // print('User - id: ${user?.id}, name: ${user?.name}');
 
     final newUser = UserDto(id: Uuid().v4(), name: 'Maria Doe');
