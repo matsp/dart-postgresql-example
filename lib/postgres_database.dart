@@ -1,32 +1,19 @@
 import 'package:postgres/postgres.dart';
 
 class PostgresDatabase {
-  late PostgreSQLConnection connection;
+  final PostgreSQLConnection connection = PostgreSQLConnection(
+    '127.0.0.1',
+    5432,
+    'app',
+    username: 'app',
+    password: 'password',
+  );
 
-  PostgresDatabase() {
-    connection = PostgreSQLConnection(
-      '127.0.0.1',
-      5432,
-      'app',
-      username: 'app',
-      password: 'password',
-    );
+  static final PostgresDatabase _instance = PostgresDatabase._singelton();
 
-  }
+  PostgresDatabase._singelton();
 
-  Future<void> connect() async {
-    try {
-      await connection.open();
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<void> disconnect() async {
-    try {
-      await connection.close();
-    } catch (e) {
-      print(e);
-    }
+  factory PostgresDatabase() {
+    return _instance;
   }
 }
